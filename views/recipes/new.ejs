@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Recipe</title>
+</head>
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Create New Recipe</h1>
+    
+    <form action="/recipes" method="POST">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <div>
+            <label for="cookingTime">Cooking Time (minutes):</label>
+            <input type="number" id="cookingTime" name="cookingTime" required>
+        </div>
+        <div>
+            <label for="servings">Servings:</label>
+            <input type="number" id="servings" name="servings" required>
+        </div>
+        <div>
+            <label for="instructions">Instructions:</label>
+            <textarea id="instructions" name="instructions" required></textarea>
+        </div>
+        <div>
+            <label>Ingredients:</label>
+            <select multiple name="ingredients" required>
+                <% ingredients.forEach(ingredient => { %>
+                    <option value="<%= ingredient._id %>">
+                        <%= ingredient.name %> (<%= ingredient.category %>)
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+        <button type="submit">Create Recipe</button>
+    </form>
+    
+    <div>
+        <p>Don't see the ingredient you need? <a href="/ingredients">Add it here</a></p>
+    </div>
+</body>
+</html>
